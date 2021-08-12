@@ -1,0 +1,14 @@
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\bin\Debug\TrackIt_DAL.dll.config
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\bin\Debug\TrackIt_DAL.dll
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\bin\Debug\TrackIt_DAL.pdb
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\bin\Debug\EntityFramework.dll
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\bin\Debug\TrackIt_DTO.dll
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\bin\Debug\TrackIt_DTO.pdb
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\bin\Debug\EntityFramework.xml
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\obj\Debug\TrackIt_DAL.csproj.AssemblyReference.cache
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\obj\Debug\TrackIt_DAL.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\obj\Debug\TrackIt_DAL.csproj.CopyComplete
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\obj\Debug\TrackIt_DAL.dll
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DAL\obj\Debug\TrackIt_DAL.pdb

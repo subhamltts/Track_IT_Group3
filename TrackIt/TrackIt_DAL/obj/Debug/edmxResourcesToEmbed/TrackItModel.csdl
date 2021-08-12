@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrackITModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="Activity_Id" />
+    </Key>
+    <Property Name="Activity_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CourseBatchId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Activity_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Activity_SDT" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Activity_EDT" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Activity_Tracker" Relationship="Self.FK__Activity___Activ__04E4BC85" FromRole="Activity" ToRole="Activity_Tracker" />
+    <NavigationProperty Name="CourseBatch" Relationship="Self.FK__Activity__Course__778AC167" FromRole="Activity" ToRole="CourseBatch" />
+  </EntityType>
+  <EntityType Name="Activity_Tracker">
+    <Key>
+      <PropertyRef Name="Tracker_Id" />
+    </Key>
+    <Property Name="Tracker_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Activity_Id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="P_PSNo" Type="Int32" Nullable="false" />
+    <Property Name="Activity_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GitUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Activity" Relationship="Self.FK__Activity___Activ__04E4BC85" FromRole="Activity_Tracker" ToRole="Activity" />
+    <NavigationProperty Name="Participant" Relationship="Self.FK__Activity___P_PSN__03F0984C" FromRole="Activity_Tracker" ToRole="Participant" />
+  </EntityType>
+  <EntityType Name="Batch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BatchId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="F_PSNO" Type="Int32" Nullable="false" />
+    <Property Name="P_PSNO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Faculty" Relationship="Self.FK__Batch__F_PSNO__6FE99F9F" FromRole="Batch" ToRole="Faculty" />
+    <NavigationProperty Name="Participant" Relationship="Self.FK__Batch__P_PSNO__70DDC3D8" FromRole="Batch" ToRole="Participant" />
+  </EntityType>
+  <EntityType Name="Course">
+    <Key>
+      <PropertyRef Name="CourseId" />
+    </Key>
+    <Property Name="CourseId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CourseName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CourseBatches" Relationship="Self.FK__CourseBat__Cours__74AE54BC" FromRole="Course" ToRole="CourseBatch" />
+  </EntityType>
+  <EntityType Name="CourseBatch">
+    <Key>
+      <PropertyRef Name="CourseBatchId" />
+    </Key>
+    <Property Name="CourseBatchId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BatchId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CourseId" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Activities" Relationship="Self.FK__Activity__Course__778AC167" FromRole="CourseBatch" ToRole="Activity" />
+    <NavigationProperty Name="Course" Relationship="Self.FK__CourseBat__Cours__74AE54BC" FromRole="CourseBatch" ToRole="Course" />
+  </EntityType>
+  <EntityType Name="Faculty">
+    <Key>
+      <PropertyRef Name="F_PSNo" />
+    </Key>
+    <Property Name="F_PSNo" Type="Int32" Nullable="false" />
+    <Property Name="F_EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Batches" Relationship="Self.FK__Batch__F_PSNO__6FE99F9F" FromRole="Faculty" ToRole="Batch" />
+  </EntityType>
+  <EntityType Name="Participant">
+    <Key>
+      <PropertyRef Name="P_PSNo" />
+    </Key>
+    <Property Name="P_PSNo" Type="Int32" Nullable="false" />
+    <Property Name="P_EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="P_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Activity_Tracker" Relationship="Self.FK__Activity___P_PSN__03F0984C" FromRole="Participant" ToRole="Activity_Tracker" />
+    <NavigationProperty Name="Batches" Relationship="Self.FK__Batch__P_PSNO__70DDC3D8" FromRole="Participant" ToRole="Batch" />
+  </EntityType>
+  <Association Name="FK__Activity___Activ__04E4BC85">
+    <End Role="Activity" Type="Self.Activity" Multiplicity="1" />
+    <End Role="Activity_Tracker" Type="Self.Activity_Tracker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activity">
+        <PropertyRef Name="Activity_Id" />
+      </Principal>
+      <Dependent Role="Activity_Tracker">
+        <PropertyRef Name="Activity_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activity__Course__778AC167">
+    <End Role="CourseBatch" Type="Self.CourseBatch" Multiplicity="1" />
+    <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CourseBatch">
+        <PropertyRef Name="CourseBatchId" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="CourseBatchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Activity___P_PSN__03F0984C">
+    <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+    <End Role="Activity_Tracker" Type="Self.Activity_Tracker" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participant">
+        <PropertyRef Name="P_PSNo" />
+      </Principal>
+      <Dependent Role="Activity_Tracker">
+        <PropertyRef Name="P_PSNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Batch__F_PSNO__6FE99F9F">
+    <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+    <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faculty">
+        <PropertyRef Name="F_PSNo" />
+      </Principal>
+      <Dependent Role="Batch">
+        <PropertyRef Name="F_PSNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Batch__P_PSNO__70DDC3D8">
+    <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+    <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Participant">
+        <PropertyRef Name="P_PSNo" />
+      </Principal>
+      <Dependent Role="Batch">
+        <PropertyRef Name="P_PSNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CourseBat__Cours__74AE54BC">
+    <End Role="Course" Type="Self.Course" Multiplicity="1" />
+    <End Role="CourseBatch" Type="Self.CourseBatch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="CourseId" />
+      </Principal>
+      <Dependent Role="CourseBatch">
+        <PropertyRef Name="CourseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TrackItConStr" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Activities" EntityType="Self.Activity" />
+    <EntitySet Name="Activity_Tracker" EntityType="Self.Activity_Tracker" />
+    <EntitySet Name="Batches" EntityType="Self.Batch" />
+    <EntitySet Name="Courses" EntityType="Self.Course" />
+    <EntitySet Name="CourseBatches" EntityType="Self.CourseBatch" />
+    <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+    <EntitySet Name="Participants" EntityType="Self.Participant" />
+    <AssociationSet Name="FK__Activity___Activ__04E4BC85" Association="Self.FK__Activity___Activ__04E4BC85">
+      <End Role="Activity" EntitySet="Activities" />
+      <End Role="Activity_Tracker" EntitySet="Activity_Tracker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activity__Course__778AC167" Association="Self.FK__Activity__Course__778AC167">
+      <End Role="CourseBatch" EntitySet="CourseBatches" />
+      <End Role="Activity" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Activity___P_PSN__03F0984C" Association="Self.FK__Activity___P_PSN__03F0984C">
+      <End Role="Participant" EntitySet="Participants" />
+      <End Role="Activity_Tracker" EntitySet="Activity_Tracker" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Batch__F_PSNO__6FE99F9F" Association="Self.FK__Batch__F_PSNO__6FE99F9F">
+      <End Role="Faculty" EntitySet="Faculties" />
+      <End Role="Batch" EntitySet="Batches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Batch__P_PSNO__70DDC3D8" Association="Self.FK__Batch__P_PSNO__70DDC3D8">
+      <End Role="Participant" EntitySet="Participants" />
+      <End Role="Batch" EntitySet="Batches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CourseBat__Cours__74AE54BC" Association="Self.FK__CourseBat__Cours__74AE54BC">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="CourseBatch" EntitySet="CourseBatches" />
+    </AssociationSet>
+    <FunctionImport Name="uspInsertActivity" ReturnType="Collection(String)">
+      <Parameter Name="Activity_Id" Mode="In" Type="String" />
+      <Parameter Name="CourseBatchID" Mode="In" Type="String" />
+      <Parameter Name="Activity_Name" Mode="In" Type="String" />
+      <Parameter Name="Activity_SDT" Mode="In" Type="DateTime" />
+      <Parameter Name="Activity_EDT" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertActivityTracker" ReturnType="Collection(String)">
+      <Parameter Name="ActivityId" Mode="In" Type="String" />
+      <Parameter Name="P_PSNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertBatch" ReturnType="Collection(String)">
+      <Parameter Name="BatchId" Mode="In" Type="Int32" />
+      <Parameter Name="F_PSNo" Mode="In" Type="Int32" />
+      <Parameter Name="P_PSNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertCourse" ReturnType="Collection(String)">
+      <Parameter Name="CourseId" Mode="In" Type="String" />
+      <Parameter Name="CourseName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertCourseBatch" ReturnType="Collection(String)">
+      <Parameter Name="CourseBatchId" Mode="In" Type="String" />
+      <Parameter Name="BatchId" Mode="In" Type="String" />
+      <Parameter Name="CourseId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertFaculty" ReturnType="Collection(String)">
+      <Parameter Name="F_PSNo" Mode="In" Type="Int32" />
+      <Parameter Name="F_EmailId" Mode="In" Type="String" />
+      <Parameter Name="F_Name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspInsertParticipant" ReturnType="Collection(String)">
+      <Parameter Name="P_PSNo" Mode="In" Type="Int32" />
+      <Parameter Name="P_EmailId" Mode="In" Type="String" />
+      <Parameter Name="P_Name" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="uspUpdateActivityTracker" ReturnType="Collection(String)">
+      <Parameter Name="ActivityId" Mode="In" Type="String" />
+      <Parameter Name="P_PSNo" Mode="In" Type="Int32" />
+      <Parameter Name="Activity_Status" Mode="In" Type="String" />
+      <Parameter Name="GitUrl" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+</Schema>

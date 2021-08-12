@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TrackITModelStoreContainer" CdmEntityContainer="TrackItConStr">
+    <EntitySetMapping Name="Activities">
+      <EntityTypeMapping TypeName="TrackITModel.Activity">
+        <MappingFragment StoreEntitySet="Activity">
+          <ScalarProperty Name="Activity_Id" ColumnName="Activity_Id" />
+          <ScalarProperty Name="CourseBatchId" ColumnName="CourseBatchId" />
+          <ScalarProperty Name="Activity_Name" ColumnName="Activity_Name" />
+          <ScalarProperty Name="Activity_SDT" ColumnName="Activity_SDT" />
+          <ScalarProperty Name="Activity_EDT" ColumnName="Activity_EDT" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Activity_Tracker">
+      <EntityTypeMapping TypeName="TrackITModel.Activity_Tracker">
+        <MappingFragment StoreEntitySet="Activity_Tracker">
+          <ScalarProperty Name="Tracker_Id" ColumnName="Tracker_Id" />
+          <ScalarProperty Name="Activity_Id" ColumnName="Activity_Id" />
+          <ScalarProperty Name="P_PSNo" ColumnName="P_PSNo" />
+          <ScalarProperty Name="Activity_Status" ColumnName="Activity_Status" />
+          <ScalarProperty Name="GitUrl" ColumnName="GitUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Batches">
+      <EntityTypeMapping TypeName="TrackITModel.Batch">
+        <MappingFragment StoreEntitySet="Batch">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+          <ScalarProperty Name="F_PSNO" ColumnName="F_PSNO" />
+          <ScalarProperty Name="P_PSNO" ColumnName="P_PSNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="TrackITModel.Course">
+        <MappingFragment StoreEntitySet="Course">
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+          <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CourseBatches">
+      <EntityTypeMapping TypeName="TrackITModel.CourseBatch">
+        <MappingFragment StoreEntitySet="CourseBatch">
+          <ScalarProperty Name="CourseBatchId" ColumnName="CourseBatchId" />
+          <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+          <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Faculties">
+      <EntityTypeMapping TypeName="TrackITModel.Faculty">
+        <MappingFragment StoreEntitySet="Faculty">
+          <ScalarProperty Name="F_PSNo" ColumnName="F_PSNo" />
+          <ScalarProperty Name="F_EmailId" ColumnName="F_EmailId" />
+          <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participants">
+      <EntityTypeMapping TypeName="TrackITModel.Participant">
+        <MappingFragment StoreEntitySet="Participant">
+          <ScalarProperty Name="P_PSNo" ColumnName="P_PSNo" />
+          <ScalarProperty Name="P_EmailId" ColumnName="P_EmailId" />
+          <ScalarProperty Name="P_Name" ColumnName="P_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="uspInsertActivity" FunctionName="TrackITModel.Store.uspInsertActivity" />
+    <FunctionImportMapping FunctionImportName="uspInsertActivityTracker" FunctionName="TrackITModel.Store.uspInsertActivityTracker" />
+    <FunctionImportMapping FunctionImportName="uspInsertBatch" FunctionName="TrackITModel.Store.uspInsertBatch" />
+    <FunctionImportMapping FunctionImportName="uspInsertCourse" FunctionName="TrackITModel.Store.uspInsertCourse" />
+    <FunctionImportMapping FunctionImportName="uspInsertCourseBatch" FunctionName="TrackITModel.Store.uspInsertCourseBatch" />
+    <FunctionImportMapping FunctionImportName="uspInsertFaculty" FunctionName="TrackITModel.Store.uspInsertFaculty" />
+    <FunctionImportMapping FunctionImportName="uspInsertParticipant" FunctionName="TrackITModel.Store.uspInsertParticipant" />
+    <FunctionImportMapping FunctionImportName="uspUpdateActivityTracker" FunctionName="TrackITModel.Store.uspUpdateActivityTracker" />
+  </EntityContainerMapping>
+</Mapping>
