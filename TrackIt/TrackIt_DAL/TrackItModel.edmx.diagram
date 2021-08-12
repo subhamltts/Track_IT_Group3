@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6adcd23f981d46afa8dfbd371f7e0862" Name="Diagram1" ZoomLevel="40">
+      <Diagram DiagramId="6adcd23f981d46afa8dfbd371f7e0862" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="TrackITModel.Activity" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrackITModel.Activity_Tracker" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrackITModel.Batch" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrackITModel.Course" Width="1.5" PointX="1.5" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrackITModel.CourseBatch" Width="1.5" PointX="1.5" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TrackITModel.Faculty" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackITModel.Activity_Tracker" Width="1.5" PointX="3.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackITModel.Batch" Width="1.5" PointX="5.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackITModel.Course" Width="1.5" PointX="5.375" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackITModel.CourseBatch" Width="1.5" PointX="7.625" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrackITModel.Faculty" Width="1.5" PointX="3.125" PointY="4.5" IsExpanded="true" />
         <EntityTypeShape EntityType="TrackITModel.Participant" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="TrackITModel.FK__Activity___Activ__04E4BC85" ManuallyRouted="false" />
         <AssociationConnector Association="TrackITModel.FK__Activity__Course__778AC167" ManuallyRouted="false" />
