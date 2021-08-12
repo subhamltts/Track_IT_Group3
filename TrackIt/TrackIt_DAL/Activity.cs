@@ -14,9 +14,20 @@ namespace TrackIt_DAL
     
     public partial class Activity
     {
-        public int Activity_Id { get; set; }
-        public int Class_ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Activity()
+        {
+            this.Activity_Tracker = new HashSet<Activity_Tracker>();
+        }
+    
+        public string Activity_Id { get; set; }
+        public string CourseBatchId { get; set; }
         public string Activity_Name { get; set; }
+        public System.DateTime Activity_SDT { get; set; }
         public System.DateTime Activity_EDT { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Activity_Tracker> Activity_Tracker { get; set; }
+        public virtual CourseBatch CourseBatch { get; set; }
     }
 }

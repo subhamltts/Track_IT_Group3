@@ -14,10 +14,10 @@ namespace TrackIt_DAL
     
     public partial class Batch
     {
-        public int Batch_ID { get; set; }
-        public int Class_ID { get; set; }
-        public int F_PSNo { get; set; }
-        public int P_PSNo { get; set; }
+        public int Id { get; set; }
+        public string BatchId { get; set; }
+        public int F_PSNO { get; set; }
+        public int P_PSNO { get; set; }
     
         public virtual Faculty Faculty { get; set; }
         public virtual Participant Participant { get; set; }

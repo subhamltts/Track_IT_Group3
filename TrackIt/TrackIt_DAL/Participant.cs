@@ -17,8 +17,8 @@ namespace TrackIt_DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Participant()
         {
+            this.Activity_Tracker = new HashSet<Activity_Tracker>();
             this.Batches = new HashSet<Batch>();
-            this.Participant_Activity_Tracker = new HashSet<Participant_Activity_Tracker>();
         }
     
         public int P_PSNo { get; set; }
@@ -26,8 +26,8 @@ namespace TrackIt_DAL
         public string P_Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Batch> Batches { get; set; }
+        public virtual ICollection<Activity_Tracker> Activity_Tracker { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Participant_Activity_Tracker> Participant_Activity_Tracker { get; set; }
+        public virtual ICollection<Batch> Batches { get; set; }
     }
 }
