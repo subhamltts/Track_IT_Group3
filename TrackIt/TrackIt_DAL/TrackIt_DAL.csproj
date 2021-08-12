@@ -50,40 +50,81 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity.cs">
+      <DependentUpon>TrackItModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActivityDAL.cs" />
+    <Compile Include="Activity_Tracker.cs">
+      <DependentUpon>TrackItModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Batch.cs">
+      <DependentUpon>TrackItModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BatchDAL.cs" />
+    <Compile Include="Course.cs">
+      <DependentUpon>TrackItModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CourseBatch.cs">
+      <DependentUpon>TrackItModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CourseBatchDAL.cs" />
+    <Compile Include="CourseDAL.cs" />
+    <Compile Include="Faculty.cs">
+      <DependentUpon>TrackItModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FacultyDAL.cs" />
+    <Compile Include="Participant.cs">
+      <DependentUpon>TrackItModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ParticipantDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TrackIt_Model.Context.cs">
+    <Compile Include="TrackItModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TrackIt_Model.Context.tt</DependentUpon>
+      <DependentUpon>TrackItModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="TrackIt_Model.Designer.cs">
+    <Compile Include="TrackItModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TrackIt_Model.edmx</DependentUpon>
+      <DependentUpon>TrackItModel.tt</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="TrackIt_Model.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TrackIt_Model.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Compile Include="TrackItModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TrackItModel.edmx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
     <None Include="packages.config" />
-    <None Include="TrackIt_Model.edmx.diagram">
-      <DependentUpon>TrackIt_Model.edmx</DependentUpon>
+    <EntityDeploy Include="TrackItModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TrackItModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="TrackItModel.edmx.diagram">
+      <DependentUpon>TrackItModel.edmx</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TrackIt_Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TrackIt_Model.Context.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <ProjectReference Include="..\TrackIt_DTO\TrackIt_DTO.csproj">
+      <Project>{a2ad2c8f-f984-48bf-b1ae-76ed4b4f2e75}</Project>
+      <Name>TrackIt_DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TrackItModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TrackItModel.edmx</DependentUpon>
+      <LastGenOutput>TrackItModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="TrackItModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TrackItModel.edmx</DependentUpon>
+      <LastGenOutput>TrackItModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

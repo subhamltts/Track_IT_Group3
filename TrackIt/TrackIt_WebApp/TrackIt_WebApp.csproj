@@ -104,6 +104,20 @@
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrackIt_BL\TrackIt_BL.csproj">
+      <Project>{fe61acd7-0b63-41e8-bb51-b2f96c2d3bd9}</Project>
+      <Name>TrackIt_BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrackIt_DAL\TrackIt_DAL.csproj">
+      <Project>{165dccef-a93e-4278-840e-bf0cb1b49d87}</Project>
+      <Name>TrackIt_DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrackIt_DTO\TrackIt_DTO.csproj">
+      <Project>{a2ad2c8f-f984-48bf-b1ae-76ed4b4f2e75}</Project>
+      <Name>TrackIt_DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -60,6 +60,16 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrackIt_BL\TrackIt_BL.csproj">
+      <Project>{fe61acd7-0b63-41e8-bb51-b2f96c2d3bd9}</Project>
+      <Name>TrackIt_BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrackIt_DTO\TrackIt_DTO.csproj">
+      <Project>{a2ad2c8f-f984-48bf-b1ae-76ed4b4f2e75}</Project>
+      <Name>TrackIt_DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
