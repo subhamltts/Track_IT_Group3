@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrackIt_DTO
 {
-    public class Class1
+    public class FacultyDTO
     {
     }
 }
