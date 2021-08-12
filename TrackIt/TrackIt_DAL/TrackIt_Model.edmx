@@ -1,0 +1,361 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TrackITModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Activity_Id" />
+          </Key>
+          <Property Name="Activity_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class_ID" Type="int" Nullable="false" />
+          <Property Name="Activity_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activity_EDT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="Batch_ID" />
+          </Key>
+          <Property Name="Batch_ID" Type="int" Nullable="false" />
+          <Property Name="Class_ID" Type="int" Nullable="false" />
+          <Property Name="F_PSNo" Type="int" Nullable="false" />
+          <Property Name="P_PSNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="F_PSNo" />
+          </Key>
+          <Property Name="F_PSNo" Type="int" Nullable="false" />
+          <Property Name="F_EmailId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="F_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="P_PSNo" />
+          </Key>
+          <Property Name="P_PSNo" Type="int" Nullable="false" />
+          <Property Name="P_EmailId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="P_Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participant_Activity_Tracker">
+          <Key>
+            <PropertyRef Name="Tracker_Id" />
+          </Key>
+          <Property Name="Tracker_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="P_PSNo" Type="int" Nullable="false" />
+          <Property Name="Activity_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Activity_Status" Type="varchar" MaxLength="50" />
+          <Property Name="GitUrl" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Batch__F_PSNo__2C3393D0">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="F_PSNo" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="F_PSNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Batch__P_PSNo__2D27B809">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="P_PSNo" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="P_PSNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__P_PSN__29572725">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Participant_Activity_Tracker" Type="Self.Participant_Activity_Tracker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="P_PSNo" />
+            </Principal>
+            <Dependent Role="Participant_Activity_Tracker">
+              <PropertyRef Name="P_PSNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="uspInsertActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Class_ID" Type="int" Mode="In" />
+          <Parameter Name="Activity_Name" Type="varchar" Mode="In" />
+          <Parameter Name="Activity_EDT" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="uspInsertActivityTracker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="P_PSNo" Type="int" Mode="In" />
+          <Parameter Name="ActivityName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspInsertBatch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Class_ID" Type="int" Mode="In" />
+          <Parameter Name="F_PSNo" Type="int" Mode="In" />
+          <Parameter Name="P_PSNo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspInsertFaculty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="F_PSNo" Type="int" Mode="In" />
+          <Parameter Name="F_EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="F_Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspInsertParticipant" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="P_PSNo" Type="int" Mode="In" />
+          <Parameter Name="P_EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="P_Name" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspUpdateActivityTracker" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="P_PSNo" Type="int" Mode="In" />
+          <Parameter Name="ActivityName" Type="varchar" Mode="In" />
+          <Parameter Name="Activity_Status" Type="varchar" Mode="In" />
+          <Parameter Name="GitUrl" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="TrackITModelStoreContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batch" EntityType="Self.Batch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faculty" EntityType="Self.Faculty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participant_Activity_Tracker" EntityType="Self.Participant_Activity_Tracker" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Batch__F_PSNo__2C3393D0" Association="Self.FK__Batch__F_PSNo__2C3393D0">
+            <End Role="Faculty" EntitySet="Faculty" />
+            <End Role="Batch" EntitySet="Batch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Batch__P_PSNo__2D27B809" Association="Self.FK__Batch__P_PSNo__2D27B809">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="Batch" EntitySet="Batch" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__P_PSN__29572725" Association="Self.FK__Participa__P_PSN__29572725">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="Participant_Activity_Tracker" EntitySet="Participant_Activity_Tracker" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TrackITModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Activity_Id" />
+          </Key>
+          <Property Name="Activity_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class_ID" Type="Int32" Nullable="false" />
+          <Property Name="Activity_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Activity_EDT" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="Batch_ID" />
+          </Key>
+          <Property Name="Batch_ID" Type="Int32" Nullable="false" />
+          <Property Name="Class_ID" Type="Int32" Nullable="false" />
+          <Property Name="F_PSNo" Type="Int32" Nullable="false" />
+          <Property Name="P_PSNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Faculty" Relationship="Self.FK__Batch__F_PSNo__2C3393D0" FromRole="Batch" ToRole="Faculty" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK__Batch__P_PSNo__2D27B809" FromRole="Batch" ToRole="Participant" />
+        </EntityType>
+        <EntityType Name="Faculty">
+          <Key>
+            <PropertyRef Name="F_PSNo" />
+          </Key>
+          <Property Name="F_PSNo" Type="Int32" Nullable="false" />
+          <Property Name="F_EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="F_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Batches" Relationship="Self.FK__Batch__F_PSNo__2C3393D0" FromRole="Faculty" ToRole="Batch" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="P_PSNo" />
+          </Key>
+          <Property Name="P_PSNo" Type="Int32" Nullable="false" />
+          <Property Name="P_EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Batches" Relationship="Self.FK__Batch__P_PSNo__2D27B809" FromRole="Participant" ToRole="Batch" />
+          <NavigationProperty Name="Participant_Activity_Tracker" Relationship="Self.FK__Participa__P_PSN__29572725" FromRole="Participant" ToRole="Participant_Activity_Tracker" />
+        </EntityType>
+        <EntityType Name="Participant_Activity_Tracker">
+          <Key>
+            <PropertyRef Name="Tracker_Id" />
+          </Key>
+          <Property Name="Tracker_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="P_PSNo" Type="Int32" Nullable="false" />
+          <Property Name="Activity_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Activity_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GitUrl" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK__Participa__P_PSN__29572725" FromRole="Participant_Activity_Tracker" ToRole="Participant" />
+        </EntityType>
+        <Association Name="FK__Batch__F_PSNo__2C3393D0">
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faculty">
+              <PropertyRef Name="F_PSNo" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="F_PSNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Batch__P_PSNo__2D27B809">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Batch" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="P_PSNo" />
+            </Principal>
+            <Dependent Role="Batch">
+              <PropertyRef Name="P_PSNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__P_PSN__29572725">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Participant_Activity_Tracker" Type="Self.Participant_Activity_Tracker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="P_PSNo" />
+            </Principal>
+            <Dependent Role="Participant_Activity_Tracker">
+              <PropertyRef Name="P_PSNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TrackItConStr" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activities" EntityType="Self.Activity" />
+          <EntitySet Name="Batches" EntityType="Self.Batch" />
+          <EntitySet Name="Faculties" EntityType="Self.Faculty" />
+          <EntitySet Name="Participants" EntityType="Self.Participant" />
+          <EntitySet Name="Participant_Activity_Tracker" EntityType="Self.Participant_Activity_Tracker" />
+          <AssociationSet Name="FK__Batch__F_PSNo__2C3393D0" Association="Self.FK__Batch__F_PSNo__2C3393D0">
+            <End Role="Faculty" EntitySet="Faculties" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Batch__P_PSNo__2D27B809" Association="Self.FK__Batch__P_PSNo__2D27B809">
+            <End Role="Participant" EntitySet="Participants" />
+            <End Role="Batch" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__P_PSN__29572725" Association="Self.FK__Participa__P_PSN__29572725">
+            <End Role="Participant" EntitySet="Participants" />
+            <End Role="Participant_Activity_Tracker" EntitySet="Participant_Activity_Tracker" />
+          </AssociationSet>
+          <FunctionImport Name="uspInsertActivity" ReturnType="Collection(String)">
+            <Parameter Name="Class_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Activity_Name" Mode="In" Type="String" />
+            <Parameter Name="Activity_EDT" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="uspInsertActivityTracker" ReturnType="Collection(String)">
+            <Parameter Name="P_PSNo" Mode="In" Type="Int32" />
+            <Parameter Name="ActivityName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspInsertBatch" ReturnType="Collection(String)">
+            <Parameter Name="Class_ID" Mode="In" Type="Int32" />
+            <Parameter Name="F_PSNo" Mode="In" Type="Int32" />
+            <Parameter Name="P_PSNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspInsertFaculty" ReturnType="Collection(String)">
+            <Parameter Name="F_PSNo" Mode="In" Type="Int32" />
+            <Parameter Name="F_EmailId" Mode="In" Type="String" />
+            <Parameter Name="F_Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspInsertParticipant" ReturnType="Collection(String)">
+            <Parameter Name="P_PSNo" Mode="In" Type="Int32" />
+            <Parameter Name="P_EmailId" Mode="In" Type="String" />
+            <Parameter Name="P_Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspUpdateActivityTracker" ReturnType="Collection(String)">
+            <Parameter Name="P_PSNo" Mode="In" Type="Int32" />
+            <Parameter Name="ActivityName" Mode="In" Type="String" />
+            <Parameter Name="Activity_Status" Mode="In" Type="String" />
+            <Parameter Name="GitUrl" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TrackITModelStoreContainer" CdmEntityContainer="TrackItConStr">
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="TrackITModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="Activity_Id" ColumnName="Activity_Id" />
+                <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
+                <ScalarProperty Name="Activity_Name" ColumnName="Activity_Name" />
+                <ScalarProperty Name="Activity_EDT" ColumnName="Activity_EDT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="TrackITModel.Batch">
+              <MappingFragment StoreEntitySet="Batch">
+                <ScalarProperty Name="Batch_ID" ColumnName="Batch_ID" />
+                <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
+                <ScalarProperty Name="F_PSNo" ColumnName="F_PSNo" />
+                <ScalarProperty Name="P_PSNo" ColumnName="P_PSNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faculties">
+            <EntityTypeMapping TypeName="TrackITModel.Faculty">
+              <MappingFragment StoreEntitySet="Faculty">
+                <ScalarProperty Name="F_PSNo" ColumnName="F_PSNo" />
+                <ScalarProperty Name="F_EmailId" ColumnName="F_EmailId" />
+                <ScalarProperty Name="F_Name" ColumnName="F_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participants">
+            <EntityTypeMapping TypeName="TrackITModel.Participant">
+              <MappingFragment StoreEntitySet="Participant">
+                <ScalarProperty Name="P_PSNo" ColumnName="P_PSNo" />
+                <ScalarProperty Name="P_EmailId" ColumnName="P_EmailId" />
+                <ScalarProperty Name="P_Name" ColumnName="P_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participant_Activity_Tracker">
+            <EntityTypeMapping TypeName="TrackITModel.Participant_Activity_Tracker">
+              <MappingFragment StoreEntitySet="Participant_Activity_Tracker">
+                <ScalarProperty Name="Tracker_Id" ColumnName="Tracker_Id" />
+                <ScalarProperty Name="P_PSNo" ColumnName="P_PSNo" />
+                <ScalarProperty Name="Activity_Name" ColumnName="Activity_Name" />
+                <ScalarProperty Name="Activity_Status" ColumnName="Activity_Status" />
+                <ScalarProperty Name="GitUrl" ColumnName="GitUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspInsertActivity" FunctionName="TrackITModel.Store.uspInsertActivity" />
+          <FunctionImportMapping FunctionImportName="uspInsertActivityTracker" FunctionName="TrackITModel.Store.uspInsertActivityTracker" />
+          <FunctionImportMapping FunctionImportName="uspInsertBatch" FunctionName="TrackITModel.Store.uspInsertBatch" />
+          <FunctionImportMapping FunctionImportName="uspInsertFaculty" FunctionName="TrackITModel.Store.uspInsertFaculty" />
+          <FunctionImportMapping FunctionImportName="uspInsertParticipant" FunctionName="TrackITModel.Store.uspInsertParticipant" />
+          <FunctionImportMapping FunctionImportName="uspUpdateActivityTracker" FunctionName="TrackITModel.Store.uspUpdateActivityTracker" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
