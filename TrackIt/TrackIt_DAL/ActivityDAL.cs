@@ -25,7 +25,6 @@ namespace TrackIt_DAL
             sqlCmdObj.Parameters.AddWithValue("@Activity_Id", ipActivity.Activity_Id);
             sqlCmdObj.Parameters.AddWithValue("@CourseBatchId", ipActivity.CourseBatchId);
             sqlCmdObj.Parameters.AddWithValue("@Activity_Name", ipActivity.Activity_Name);
-
             sqlCmdObj.Parameters.AddWithValue("@Activity_SDT", ipActivity.Activity_SDT);
             sqlCmdObj.Parameters.AddWithValue("@Activity_EDT", ipActivity.Activity_EDT);
             try
@@ -51,7 +50,33 @@ namespace TrackIt_DAL
             sqlCmdObj = new SqlCommand("dbo.uspInsertActivityTracker", sqlConObj);
             sqlCmdObj.CommandType = CommandType.StoredProcedure;
             sqlCmdObj.Parameters.AddWithValue("@Activity_Id", ipActTracker.Activity_Id);
-            sqlCmdObj.Parameters.AddWithValue("@Activity_Name", ipActTracker.P_PSNo);
+            sqlCmdObj.Parameters.AddWithValue("@P_PSNo", ipActTracker.P_PSNo);
+            try
+            {
+                sqlConObj.Open();
+                SqlParameter returnManager = sqlCmdObj.Parameters.Add("RetVal", SqlDbType.Int);
+                returnManager.Direction = ParameterDirection.ReturnValue;
+                sqlCmdObj.ExecuteNonQuery();
+                int returnValue = (int)returnManager.Value;
+                return returnValue;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                sqlConObj.Close();
+            }
+        }
+        public int UpdateActivityTracker(ActivityTrackerDTO ipActTracker)
+        {
+            sqlCmdObj = new SqlCommand("dbo.uspUpdateActivityTracker", sqlConObj);
+            sqlCmdObj.CommandType = CommandType.StoredProcedure;
+            sqlCmdObj.Parameters.AddWithValue("@Activity_Id", ipActTracker.Activity_Id);
+            sqlCmdObj.Parameters.AddWithValue("@P_PSNo", ipActTracker.P_PSNo);
+            sqlCmdObj.Parameters.AddWithValue("@Activity_Status", ipActTracker.Activity_Status);
+            sqlCmdObj.Parameters.AddWithValue("@GitUrl", ipActTracker.GitUrl);
             try
             {
                 sqlConObj.Open();

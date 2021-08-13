@@ -41,5 +41,18 @@ namespace TrackIt_BL
                 throw ex;
             }
         }
+        public int UpdateActivityTracker(ActivityTrackerDTO newActTrackerDetails)
+        {
+            try
+            {
+                int returnvalue = objActivity.UpdateActivityTracker(newActTrackerDetails);
+                return returnvalue;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

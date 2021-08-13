@@ -15,12 +15,12 @@ namespace TrackIt_BL
         {
             objFaculty = new FacultyDAL();
         }
-        public List<FacultyDTO> GetFaculties()
+        public List<FacultyOpDTO> GetStatus(string activityId, string activityStatus)
         {
             try
             {
-                var lstFaculty = objFaculty.GetFaculties();
-                return lstFaculty;
+                var lstPartByAct = objFaculty.GetStatus(activityId,activityStatus);
+                return lstPartByAct;
             }
             catch (Exception ex)
             {

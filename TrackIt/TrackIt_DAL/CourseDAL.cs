@@ -22,7 +22,7 @@ namespace TrackIt_DAL
         {
             sqlCmdObj = new SqlCommand("dbo.uspInsertCourse", sqlConObj);
             sqlCmdObj.CommandType = CommandType.StoredProcedure;
-            //sqlCmdObj.Parameters.AddWithValue("@CourseId", ipCourse.CourseId);
+            sqlCmdObj.Parameters.AddWithValue("@CourseId", ipCourse.CourseId);
             sqlCmdObj.Parameters.AddWithValue("@CourseName", ipCourse.CourseName);
 
             try

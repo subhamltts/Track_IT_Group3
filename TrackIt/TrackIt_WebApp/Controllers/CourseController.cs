@@ -19,7 +19,7 @@ namespace TrackIt_WebApp.Controllers
             try
             {
 
-                if (ipCrcObj != null && ipCrcObj.CourseName != null)
+                if (ipCrcObj != null && ipCrcObj.CourseId != null && ipCrcObj.CourseName != null)
                 {
                     objCourse = new CourseBL();
                     int retVal = objCourse.AddNewCourse(ipCrcObj);

@@ -22,7 +22,7 @@ namespace TrackIt_DAL
         {
             sqlCmdObj = new SqlCommand("dbo.uspInsertCourseBatch", sqlConObj);
             sqlCmdObj.CommandType = CommandType.StoredProcedure;
-            // sqlCmdObj.Parameters.AddWithValue("@CourseBatchId", ipCourseBatch.CourseBatchId);
+            sqlCmdObj.Parameters.AddWithValue("@CourseBatchId", ipCourseBatch.CourseBatchId);
             sqlCmdObj.Parameters.AddWithValue("@BatchId", ipCourseBatch.BatchId);
             sqlCmdObj.Parameters.AddWithValue("@CourseId", ipCourseBatch.CourseId);
 

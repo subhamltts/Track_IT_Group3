@@ -19,24 +19,37 @@ namespace TrackIt_DAL
         {
             sqlConObj = new SqlConnection(ConfigurationManager.ConnectionStrings["TrackItDTConStr"].ToString());
         }
-        public List<FacultyDTO> GetFaculties()
+        public List<FacultyOpDTO> GetStatus(string activityId,string activityStatus)
         {
             try
             {
-                List<FacultyDTO> lstFaculty = new List<FacultyDTO>();
+                List<FacultyOpDTO> lstPartByAct = new List<FacultyOpDTO>();
                 TrackItConStr objContext = new TrackItConStr();
-                var objFacDALList = objContext.Faculties.ToList();
-                foreach (var item in objFacDALList)
+
+                var query = (from Part in objContext.Participants
+                            join ActTkr in objContext.Activity_Tracker
+                            on Part.P_PSNo equals ActTkr.P_PSNo
+                            join Act in objContext.Activities
+                            on ActTkr.Activity_Id equals Act.Activity_Id
+                            where (ActTkr.Activity_Id == activityId
+                            && ActTkr.Activity_Status == activityStatus)
+                            select new
+                            {   ParticipantId = Part.P_PSNo, 
+                                ParticipantName = Part.P_Name, 
+                                ActivityName = Act.Activity_Name }).ToList();
+
+                
+                foreach (var item in query)
                 {
-                    lstFaculty.Add(
-                        new FacultyDTO
+                    lstPartByAct.Add(
+                        new FacultyOpDTO
                         {
-                            F_PSNo = item.F_PSNo,
-                            F_EmailId = item.F_EmailId,
-                            F_Name = item.F_Name
+                            P_PSNo = item.ParticipantId,
+                            P_Name = item.ParticipantName,
+                            Activity_Name = item.ActivityName
                         });
                 }
-                return lstFaculty;
+                return lstPartByAct;
             }
             catch (Exception ex)
             {

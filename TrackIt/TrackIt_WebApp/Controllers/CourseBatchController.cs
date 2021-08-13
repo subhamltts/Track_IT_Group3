@@ -19,7 +19,7 @@ namespace TrackIt_WebApp.Controllers
             try
             {
 
-                if (ipCrcBatchObj != null && ipCrcBatchObj.BatchId != null && ipCrcBatchObj.CourseId != null)
+                if (ipCrcBatchObj != null &&  ipCrcBatchObj.CourseBatchId != null && ipCrcBatchObj.BatchId != null && ipCrcBatchObj.CourseId != null)
                 {
                     objCrcBatch = new CourseBatchBL();
                     int retVal = objCrcBatch.AddNewCourseBatch(ipCrcBatchObj);

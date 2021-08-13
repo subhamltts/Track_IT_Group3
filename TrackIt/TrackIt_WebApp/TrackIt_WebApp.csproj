@@ -86,6 +86,10 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\ActivityTrackerController.cs" />
+    <Compile Include="Controllers\BatchController.cs" />
+    <Compile Include="Controllers\CourseBatchController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\FacultyController.cs" />
     <Compile Include="Controllers\ParticipantController.cs" />
     <Compile Include="Global.asax.cs">
