@@ -17,13 +17,13 @@ namespace TrackIt_DAL
 
         public FacultyDAL()
         {
-            sqlConObj = new SqlConnection(ConfigurationManager.ConnectionStrings["TrackItDTConStr"].ToString());
+           // sqlConObj = new SqlConnection(ConfigurationManager.ConnectionStrings["TrackItDTConStr"].ToString());
         }
-        public List<FacultyOpDTO> GetStatus(string activityId,string activityStatus)
+        public List<StatusDTO> GetStatus(string activityId,string activityStatus)
         {
             try
             {
-                List<FacultyOpDTO> lstPartByAct = new List<FacultyOpDTO>();
+                List<StatusDTO> lstPartByAct = new List<StatusDTO>();
                 TrackItConStr objContext = new TrackItConStr();
 
                 var query = (from Part in objContext.Participants
@@ -36,17 +36,20 @@ namespace TrackIt_DAL
                             select new
                             {   ParticipantId = Part.P_PSNo, 
                                 ParticipantName = Part.P_Name, 
-                                ActivityName = Act.Activity_Name }).ToList();
+                                ActivityName = Act.Activity_Name,
+                                ActivityStatus = ActTkr.Activity_Status
+                            }).ToList();
 
                 
                 foreach (var item in query)
                 {
                     lstPartByAct.Add(
-                        new FacultyOpDTO
+                        new StatusDTO
                         {
                             P_PSNo = item.ParticipantId,
                             P_Name = item.ParticipantName,
-                            Activity_Name = item.ActivityName
+                            Activity_Name = item.ActivityName,
+                            Activity_Status = item.ActivityStatus
                         });
                 }
                 return lstPartByAct;
@@ -61,9 +64,9 @@ namespace TrackIt_DAL
         {
             sqlCmdObj = new SqlCommand("dbo.uspInsertFaculty", sqlConObj);
             sqlCmdObj.CommandType = CommandType.StoredProcedure;
-            sqlCmdObj.Parameters.AddWithValue("@FacultyId", newFacultyDetails.F_PSNo);
-            sqlCmdObj.Parameters.AddWithValue("@FacultyEmail", newFacultyDetails.F_EmailId);
-            sqlCmdObj.Parameters.AddWithValue("@FacultyName", newFacultyDetails.F_Name);
+            sqlCmdObj.Parameters.AddWithValue("@F_PSNo", newFacultyDetails.F_PSNo);
+            sqlCmdObj.Parameters.AddWithValue("@F_EmailId", newFacultyDetails.F_EmailId);
+            sqlCmdObj.Parameters.AddWithValue("@F_Name", newFacultyDetails.F_Name);
             try
             {
                 sqlConObj.Open();

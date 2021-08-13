@@ -47,6 +47,7 @@
     <Compile Include="CourseBatchDTO.cs" />
     <Compile Include="CourseDTO.cs" />
     <Compile Include="FacultyDTO.cs" />
+    <Compile Include="StatusDTO.cs" />
     <Compile Include="ParticipantDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

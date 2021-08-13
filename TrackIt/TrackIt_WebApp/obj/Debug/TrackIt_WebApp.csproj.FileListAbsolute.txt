@@ -74,3 +74,5 @@ C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_WebApp\obj\Debug\TrackI
 C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_WebApp\obj\Debug\TrackIt_WebApp.csproj.CopyComplete
 C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_WebApp\obj\Debug\TrackIt_WebApp.dll
 C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_WebApp\obj\Debug\TrackIt_WebApp.pdb
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_WebApp\bin\EntityFramework.SqlServer.dll
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_WebApp\bin\EntityFramework.SqlServer.xml

@@ -19,24 +19,41 @@ namespace TrackIt_DAL
         {
             sqlConObj = new SqlConnection(ConfigurationManager.ConnectionStrings["TrackItDTConStr"].ToString());
         }
-        public List<ParticipantDTO> GetParticipant()
+      
+        public List<StatusDTO> GetActStatus(int participantId)
         {
             try
             {
-                List<ParticipantDTO> lstFaculty = new List<ParticipantDTO>();
+                List<StatusDTO> lstActivityStatus = new List<StatusDTO>();
                 TrackItConStr objContext = new TrackItConStr();
-                var objPartDALList = objContext.Participants.ToList();
-                foreach (var item in objPartDALList)
+
+                var query = (from Part in objContext.Participants
+                             join ActTkr in objContext.Activity_Tracker
+                             on Part.P_PSNo equals ActTkr.P_PSNo
+                             join Act in objContext.Activities
+                             on ActTkr.Activity_Id equals Act.Activity_Id
+                             where (Part.P_PSNo == participantId)
+                             select new
+                             {
+                                 ParticipantId = Part.P_PSNo,
+                                 ParticipantName = Part.P_Name,
+                                 ActivityName = Act.Activity_Name,
+                                 ActivityStatus = ActTkr.Activity_Status
+                             }).ToList();
+
+
+                foreach (var item in query)
                 {
-                    lstFaculty.Add(
-                        new ParticipantDTO
+                    lstActivityStatus.Add(
+                        new StatusDTO
                         {
-                            P_PSNo = item.P_PSNo,
-                            P_EmailId = item.P_EmailId,
-                            P_Name = item.P_Name
+                            P_PSNo = item.ParticipantId,
+                            P_Name = item.ParticipantName,
+                            Activity_Name = item.ActivityName,
+                            Activity_Status = item.ActivityStatus
                         });
                 }
-                return lstFaculty;
+                return lstActivityStatus;
             }
             catch (Exception ex)
             {
@@ -48,9 +65,9 @@ namespace TrackIt_DAL
         {
             sqlCmdObj = new SqlCommand("dbo.uspInsertParticipant", sqlConObj);
             sqlCmdObj.CommandType = CommandType.StoredProcedure;
-            sqlCmdObj.Parameters.AddWithValue("@ParticipantId", newParticipantDetails.P_PSNo);
-            sqlCmdObj.Parameters.AddWithValue("@ParticipantEmail", newParticipantDetails.P_EmailId);
-            sqlCmdObj.Parameters.AddWithValue("@ParticipantName", newParticipantDetails.P_Name);
+            sqlCmdObj.Parameters.AddWithValue("@P_PSNo", newParticipantDetails.P_PSNo);
+            sqlCmdObj.Parameters.AddWithValue("@P_EmailId", newParticipantDetails.P_EmailId);
+            sqlCmdObj.Parameters.AddWithValue("@P_Name", newParticipantDetails.P_Name);
             try
             {
                 sqlConObj.Open();

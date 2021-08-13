@@ -15,12 +15,13 @@ namespace TrackIt_BL
         {
             objParticipant = new ParticipantDAL();
         }
-        public List<ParticipantDTO> GetParticipant()
+
+        public List<StatusDTO> GetActStatus(int participantId)
         {
             try
             {
-                var lstParticipant = objParticipant.GetParticipant();
-                return lstParticipant;
+                var lstActivityStatus = objParticipant.GetActStatus(participantId);
+                return lstActivityStatus;
             }
             catch (Exception ex)
             {

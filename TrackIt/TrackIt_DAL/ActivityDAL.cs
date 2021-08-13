@@ -73,7 +73,7 @@ namespace TrackIt_DAL
         {
             sqlCmdObj = new SqlCommand("dbo.uspUpdateActivityTracker", sqlConObj);
             sqlCmdObj.CommandType = CommandType.StoredProcedure;
-            sqlCmdObj.Parameters.AddWithValue("@Activity_Id", ipActTracker.Activity_Id);
+            sqlCmdObj.Parameters.AddWithValue("@ActivityId", ipActTracker.Activity_Id);
             sqlCmdObj.Parameters.AddWithValue("@P_PSNo", ipActTracker.P_PSNo);
             sqlCmdObj.Parameters.AddWithValue("@Activity_Status", ipActTracker.Activity_Status);
             sqlCmdObj.Parameters.AddWithValue("@GitUrl", ipActTracker.GitUrl);

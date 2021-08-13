@@ -15,7 +15,7 @@ namespace TrackIt_BL
         {
             objFaculty = new FacultyDAL();
         }
-        public List<FacultyOpDTO> GetStatus(string activityId, string activityStatus)
+        public List<StatusDTO> GetStatus(string activityId, string activityStatus)
         {
             try
             {

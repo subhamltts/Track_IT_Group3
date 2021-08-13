@@ -3,3 +3,4 @@ C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DTO\bin\Debug\TrackIt_D
 C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DTO\obj\Debug\TrackIt_DTO.csproj.CoreCompileInputs.cache
 C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DTO\obj\Debug\TrackIt_DTO.dll
 C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DTO\obj\Debug\TrackIt_DTO.pdb
+C:\Users\HP\Desktop\C# Projects\Track_It\TrackIt\TrackIt_DTO\obj\Debug\TrackIt_DTO.csproj.AssemblyReference.cache
