@@ -15,12 +15,12 @@ namespace TrackIt_BL
         {
             objFaculty = new FacultyDAL();
         }
-        public int GetAllFacultyDetails(FacultyDTO newFacultyDetails)
+        public List<FacultyDTO> GetFaculties()
         {
             try
             {
-                int returvalue = objFaculty.GetAllFacultyDetails(newFacultyDetails);
-                return returvalue;
+                var lstFaculty = objFaculty.GetFaculties();
+                return lstFaculty;
             }
             catch (Exception ex)
             {

@@ -19,31 +19,28 @@ namespace TrackIt_DAL
         {
             sqlConObj = new SqlConnection(ConfigurationManager.ConnectionStrings["TrackItDTConStr"].ToString());
         }
-        public int GetAllFacultyDetails(FacultyDTO newFacultyDetails)
+        public List<FacultyDTO> GetFaculties()
         {
-            
-            sqlCmdObj = new SqlCommand("dbo.uspInsertFacultyDetails", sqlConObj);
-            sqlCmdObj.CommandType = CommandType.StoredProcedure;
-            sqlCmdObj.Parameters.AddWithValue("@FacultyId", newFacultyDetails.F_PSNo);
-            sqlCmdObj.Parameters.AddWithValue("@FacultyEmail", newFacultyDetails.F_EmailId);
-            sqlCmdObj.Parameters.AddWithValue("@FacultyName", newFacultyDetails.F_Name);
-            
             try
             {
-                sqlConObj.Open();
-                SqlParameter returnManager = sqlCmdObj.Parameters.Add("RetVal", SqlDbType.Int);
-                returnManager.Direction = ParameterDirection.ReturnValue;
-                sqlCmdObj.ExecuteNonQuery();
-                int returnValue = (int)returnManager.Value;
-                return returnValue;
+                List<FacultyDTO> lstFaculty = new List<FacultyDTO>();
+                TrackItConStr objContext = new TrackItConStr();
+                var objFacDALList = objContext.Faculties.ToList();
+                foreach (var item in objFacDALList)
+                {
+                    lstFaculty.Add(
+                        new FacultyDTO
+                        {
+                            F_PSNo = item.F_PSNo,
+                            F_EmailId = item.F_EmailId,
+                            F_Name = item.F_Name
+                        });
+                }
+                return lstFaculty;
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-            finally
-            {
-                sqlConObj.Close();
             }
         }
 

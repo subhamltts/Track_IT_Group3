@@ -15,12 +15,12 @@ namespace TrackIt_BL
         {
             objParticipant = new ParticipantDAL();
         }
-        public int GetAllParticipantDetails(ParticipantDTO newParticipantDetails)
+        public List<ParticipantDTO> GetParticipant()
         {
             try
             {
-                int returvalue = objParticipant.GetAllParticipantDetails(newParticipantDetails);
-                return returvalue;
+                var lstParticipant = objParticipant.GetParticipant();
+                return lstParticipant;
             }
             catch (Exception ex)
             {
